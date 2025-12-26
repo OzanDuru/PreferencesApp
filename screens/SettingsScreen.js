@@ -1,19 +1,29 @@
 import { View, Text, Pressable, StyleSheet } from 'react-native';
 
 import { useAuth } from '../context/AuthContext';
+import { useTheme } from '../hooks/useTheme';
 
 export default function SettingsScreen({ navigation }) {
   const { user, logout } = useAuth();
+  const { theme, toggleTheme } = useTheme();
+  const isDark = theme === 'dark';
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Settings</Text>
-      <Text style={styles.subtitle}>Logged in as {user?.username}</Text>
+    <View style={[styles.container, isDark && styles.containerDark]}>
+      <Text style={[styles.title, isDark && styles.textDark]}>
+        Settings
+      </Text>
+      <Text style={[styles.subtitle, isDark && styles.textDark]}>
+        Logged in as {user?.username}
+      </Text>
+      <Pressable style={styles.button} onPress={toggleTheme}>
+        <Text style={styles.buttonText}>Toggle Theme</Text>
+      </Pressable>
       <Pressable style={styles.button} onPress={() => navigation.goBack()}>
         <Text style={styles.buttonText}>Back</Text>
       </Pressable>
       <Pressable style={styles.linkButton} onPress={logout}>
-        <Text style={styles.linkText}>Logout</Text>
+        <Text style={[styles.linkText, isDark && styles.textDark]}>Logout</Text>
       </Pressable>
     </View>
   );
@@ -24,6 +34,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    padding: 24,
+    backgroundColor: '#f8fafc',
+  },
+  containerDark: {
+    backgroundColor: '#0f172a',
   },
   title: {
     fontSize: 24,
@@ -52,5 +67,8 @@ const styles = StyleSheet.create({
   linkText: {
     color: '#111827',
     fontWeight: '600',
+  },
+  textDark: {
+    color: '#f8fafc',
   },
 });
