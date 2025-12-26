@@ -8,6 +8,11 @@ export default function SettingsScreen({ navigation }) {
   const { theme, toggleTheme } = useTheme();
   const isDark = theme === 'dark';
 
+  const handleLogout = () => {
+    logout();
+    navigation.replace('Login');
+  };
+
   return (
     <View style={[styles.container, isDark && styles.containerDark]}>
       <Text style={[styles.title, isDark && styles.textDark]}>
@@ -22,7 +27,7 @@ export default function SettingsScreen({ navigation }) {
       <Pressable style={styles.button} onPress={() => navigation.goBack()}>
         <Text style={styles.buttonText}>Back</Text>
       </Pressable>
-      <Pressable style={styles.linkButton} onPress={logout}>
+      <Pressable style={styles.linkButton} onPress={handleLogout}>
         <Text style={[styles.linkText, isDark && styles.textDark]}>Logout</Text>
       </Pressable>
     </View>

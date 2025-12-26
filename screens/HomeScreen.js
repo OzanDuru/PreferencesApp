@@ -5,6 +5,11 @@ import { useAuth } from '../context/AuthContext';
 export default function HomeScreen({ navigation }) {
   const { user, logout } = useAuth();
 
+  const handleLogout = () => {
+    logout();
+    navigation.replace('Login');
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Welcome, {user?.username}</Text>
@@ -14,7 +19,7 @@ export default function HomeScreen({ navigation }) {
       >
         <Text style={styles.buttonText}>Settings</Text>
       </Pressable>
-      <Pressable style={styles.linkButton} onPress={logout}>
+      <Pressable style={styles.linkButton} onPress={handleLogout}>
         <Text style={styles.linkText}>Logout</Text>
       </Pressable>
     </View>
