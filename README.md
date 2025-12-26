@@ -67,16 +67,3 @@ App.js
 
 Submit the GitHub repository link as required by the lab instructions.
 
-````
-
----
-
-Bunu koyduktan sonra README değişikliği için de bir commit atmayı unutma:
-
-```bash
-git add README.md
-git commit -m "docs: update README with setup and project details"
-git push
-````
-
-
